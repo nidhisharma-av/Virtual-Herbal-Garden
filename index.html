@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Herbal Garden</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Leaflet.js for map integration -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- A-Frame and AR.js for AR support -->
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">Virtual Herbal Garden</div>
+        <nav>
+            <a href="">Home</a>
+            <a href="">Info</a>
+            <a href="">Contact</a>
+        </nav>
+    </header>
+    <div class="carousel">
+        <div class="list">
+            <div class="item">
+                <img src="images/img1.png">
+                <div class="introduce">
+                    <div class="topic">Ashwagandha</div>
+                    <br>
+                    <div class="des">
+                        Ashwagandha is a powerful adaptogenic herb known for reducing stress, improving stamina, and boosting immunity. Perfect for modern lifestyle challenges.
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div class="title">Ashwagandha (Withania Somnifera)</div>
+                    <div class="des">
+                        Ashwagandha, scientifically known as Withania Somnifera, is one of the most revered herbs in Ayurvedic medicine. This remarkable adaptogen has been used for over 3,000 years to enhance vitality and help the body manage stress.
+                        <br><br>
+                        The herb works by regulating cortisol levels, supporting adrenal function, and enhancing the body's natural ability to cope with physical and mental stressors. Studies show it can improve cognitive function, increase muscle mass and strength, and promote deeper, more restful sleep patterns.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Active Compound</p>
+                            <p>Withanolides</p>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <p>Soil Type</p>
+                            <p>Sandy loam, well-drained</p>
+                        </div>
+                        <div>
+                            <p>Duration</p>
+                            <p>150–180 days</p>
+                        </div>
+                        <div>
+                            <p>Best For</p>
+                            <p>Stress relief, stamina boost</p>
+                        </div>
+                        <div>
+                            <p>Avoid If</p>
+                            <p>Thyroid disorders, pregnancy</p>
+                        </div>
+                    </div>
+                    <div class="map-container" id="map-ashwagandha" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="ar-container" id="ar-ashwagandha" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="checkout">
+                        <button onclick="toggleMap('ashwagandha')">VIEW MAP</button>
+                        <button onclick="toggleAR('ashwagandha')">VIEW IN AR</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/img6.png">
+                <div class="introduce">
+                    <div class="topic">Tulsi</div>
+                    <br>
+                    <div class="des">
+                        Tulsi, or Holy Basil, is known as the "Queen of Herbs" in Ayurveda. It supports respiratory health, boosts immunity, and has anti-inflammatory properties. Widely grown for both medicinal and spiritual purposes.
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div class="title">Tulsi (Holy Basil)</div>
+                    <div class="des">
+                        Tulsi, or Holy Basil, is known as the "Queen of Herbs" in Ayurveda. It supports respiratory health, boosts immunity, and has anti-inflammatory properties. 
+                        <br><br>
+                        This sacred herb is widely grown for both medicinal and spiritual purposes, offering natural wellness benefits for daily health maintenance.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Active Compound</p>
+                            <p>Eugenol, Ursolic acid</p>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <p>Soil Type</p>
+                            <p>Loamy, well-drained</p>
+                        </div>
+                        <div>
+                            <p>Duration</p>
+                            <p>60–90 days</p>
+                        </div>
+                        <div>
+                            <p>Best For</p>
+                            <p>Respiratory health, immunity</p>
+                        </div>
+                        <div>
+                            <p>Avoid If</p>
+                            <p>On blood-thinning medication</p>
+                        </div>
+                    </div>
+                    <div class="map-container" id="map-tulsi" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="ar-container" id="ar-tulsi" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="checkout">
+                        <button onclick="toggleMap('tulsi')">VIEW MAP</button>
+                        <button onclick="toggleAR('tulsi')">VIEW IN AR</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/img2.png">
+                <div class="introduce">
+                    <div class="topic">Cardamom</div>
+                    <br>
+                    <div class="des">
+                        Cardamom is a fragrant spice known for its sweet, slightly citrusy flavor and strong antioxidant properties. It supports digestion, freshens breath, and is used in both culinary and medicinal traditions.
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div class="title">Cardamom</div>
+                    <div class="des">
+                        Cardamom, often called the "Queen of Spices," is valued for its aromatic pods that enhance both sweet and savory dishes. It promotes digestive health, reduces inflammation, and has antimicrobial properties.
+                        <br><br>
+                        Traditionally used in Ayurveda and other systems of medicine, cardamom supports respiratory health and overall wellness.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Active Compound</p>
+                            <p>Cineole, Terpinyl acetate</p>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <p>Soil Type</p>
+                            <p>Well-drained loamy soil, rich in organic matter</p>
+                        </div>
+                        <div>
+                            <p>Duration</p>
+                            <p>2–3 years (first harvest)</p>
+                        </div>
+                        <div>
+                            <p>Best For</p>
+                            <p>Digestive health, respiratory wellness</p>
+                        </div>
+                        <div>
+                            <p>Avoid If</p>
+                            <p>Gallstones, severe acid reflux</p>
+                        </div>
+                    </div>
+                    <div class="map-container" id="map-cardamom" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="ar-container" id="ar-cardamom" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="checkout">
+                        <button onclick="toggleMap('cardamom')">VIEW MAP</button>
+                        <button onclick="toggleAR('cardamom')">VIEW IN AR</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/img4.png">
+                <div class="introduce">
+                    <div class="topic">Clove</div>
+                    <br>
+                    <div class="des">
+                        Cloves are rich in antioxidants, help fight bacteria, reduce inflammation, support digestion, and may help regulate blood sugar.
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div class="title">Clove (Syzygium aromaticum)</div>
+                    <div class="des">
+                        Clove contains eugenol, which provides pain relief, fights microbial infections, and improves digestion. Traditionally used for toothaches, sore throats, bloating, and maintaining oral health. It also supports metabolic health and protects cells from oxidative damage.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Active Compound</p>
+                            <p>Eugenol</p>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <p>Soil Type</p>
+                            <p>Well-drained loamy soil</p>
+                        </div>
+                        <div>
+                            <p>Duration</p>
+                            <p>6–8 years (first harvest)</p>
+                        </div>
+                        <div>
+                            <p>Best For</p>
+                            <p>Oral health, digestion, pain relief</p>
+                        </div>
+                        <div>
+                            <p>Avoid If</p>
+                            <p>Bleeding disorders</p>
+                        </div>
+                    </div>
+                    <div class="map-container" id="map-clove" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="ar-container" id="ar-clove" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="checkout">
+                        <button onclick="toggleMap('clove')">VIEW MAP</button>
+                        <button onclick="toggleAR('clove')">VIEW IN AR</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/img5.png">
+                <div class="introduce">
+                    <div class="topic">Cinnamon</div>
+                    <br>
+                    <div class="des">
+                        Cinnamon is a natural antioxidant, helps control blood sugar, supports heart health, reduces inflammation, and fights some microbes.
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div class="title">Cinnamon (Cinnamomum verum)</div>
+                    <div class="des">
+                        Containing cinnamaldehyde, cinnamon supports diabetes management, reduces cholesterol, and protects against oxidative stress. It’s used for digestive issues, infection prevention, and may offer neuroprotective benefits.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Active Compound</p>
+                            <p>Cinnamaldehyde</p>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <p>Soil Type</p>
+                            <p>Sandy loam, slightly acidic</p>
+                        </div>
+                        <div>
+                            <p>Duration</p>
+                            <p>2–3 years (first harvest)</p>
+                        </div>
+                        <div>
+                            <p>Best For</p>
+                            <p>Blood sugar control, digestion</p>
+                        </div>
+                        <div>
+                            <p>Avoid If</p>
+                            <p>Liver problems, pregnancy (large doses)</p>
+                        </div>
+                    </div>
+                    <div class="map-container" id="map-cinnamon" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="ar-container" id="ar-cinnamon" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="checkout">
+                        <button onclick="toggleMap('cinnamon')">VIEW MAP</button>
+                        <button onclick="toggleAR('cinnamon')">VIEW IN AR</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/img3.png">
+                <div class="introduce">
+                    <div class="topic">Turmeric</div>
+                    <br>
+                    <div class="des">
+                        Turmeric has powerful anti-inflammatory and antioxidant effects, supports liver and heart health, aids digestion, and may help protect against certain diseases.
+                    </div>
+                    <button class="seeMore">SEE MORE &#8599</button>
+                </div>
+                <div class="detail">
+                    <div class="title">Turmeric (Curcuma longa)</div>
+                    <div class="des">
+                        Curcumin, turmeric’s active compound, is known to reduce inflammation, improve arthritis symptoms, protect the liver, and boost brain function. It may help prevent chronic diseases and support overall wellness.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Active Compound</p>
+                            <p>Curcumin</p>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <p>Soil Type</p>
+                            <p>Well-drained, fertile loamy soil</p>
+                        </div>
+                        <div>
+                            <p>Duration</p>
+                            <p>7–9 months</p>
+                        </div>
+                        <div>
+                            <p>Best For</p>
+                            <p>Arthritis relief, digestion, liver support</p>
+                        </div>
+                        <div>
+                            <p>Avoid If</p>
+                            <p>Gallbladder disease, surgery soon</p>
+                        </div>
+                    </div>
+                    <div class="map-container" id="map-turmeric" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="ar-container" id="ar-turmeric" style="display: none; height: 200px; margin-top: 20px;"></div>
+                    <div class="checkout">
+                        <button onclick="toggleMap('turmeric')">VIEW MAP</button>
+                        <button onclick="toggleAR('turmeric')">VIEW IN AR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
+            <button id="back">See All  &#8599</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
